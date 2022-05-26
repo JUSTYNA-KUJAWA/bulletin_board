@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 
 import { store } from './redux/store';
@@ -13,19 +13,21 @@ import { Post } from './components/views/Post/Post';
 import { PostEdit } from './components/views/PostEdit/PostEdit';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { NotFound } from './components/views/NotFound/NotFound';
+import {Switcher} from './components/common/Switcher/Switcher';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: { main: '#2B4C6F' },
   },
 });
 
-const App = () => (
+const App = (props) => (
   <Provider store={store}>
     <BrowserRouter>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <Switcher />
           <MainLayout>
             <Switch>
               <Route exact path='/' component={Homepage} />
