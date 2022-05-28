@@ -5,14 +5,14 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
-const passportSetup = require('./config/passport');
+require('./config/passport');
+require('dotenv').config();
 
-const app = express();
 const postsRoutes = require('./routes/post.routes');
 const usersRoutes = require('./routes/user.routes');
 const authRoutes = require('./routes/auth.routes');
 
-require('dotenv').config();
+const app = express();
 
 /* PASSPORT */
 app.use(session({ secret: 'anything' }));
@@ -33,21 +33,27 @@ app.use('/auth', authRoutes);
 app.use('/api', (req, res) => {
   res.status(404).send({ post: 'Not found...' });
 });
+
 /* REACT WEBSITE */
 app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, './uploads')));
+
+// app.use('/public/uploads', express.static(__dirname + '/uploads/'));
 app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });
-/* MONGOOSE */
-mongoose.connect('mongodb://localhost:27017/bulletinBoard', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
+mongoose.connect(
+  `mongodb+srv://JUSTI:test123@cluster0.epgpr.mongodb.net/bulletinBoard?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+//
 const db = mongoose.connection;
 db.once('open', () => {
   console.log('Successfully connected to the database');
 });
 db.on('error', (err) => console.log('Error: ' + err));
+
 /* START SERVER */
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
