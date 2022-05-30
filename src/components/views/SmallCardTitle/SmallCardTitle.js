@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 
 import styles from './SmallCardTitle.module.scss';
 
-import utils from '../../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {

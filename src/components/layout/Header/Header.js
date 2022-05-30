@@ -15,7 +15,7 @@ const Header = ({userStatus}) => {
       <NavBar/>
       <div className={styles.navlinks}>
         <Link to={`/allposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
-        <Link to={`/userloggedposts`} className={styles.link}><CommonButton>User posts</CommonButton></Link>
+        <Link to={`/myposts`} className={styles.link}><CommonButton>My posts</CommonButton></Link>
         {!userStatus && (
               <IconButton
                 aria-label='account of current user'
