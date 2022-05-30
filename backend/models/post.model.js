@@ -1,19 +1,17 @@
-/* eslint-disable linebreak-style */
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-  author: { type: String, required: true, ref: 'User' },
+  email: { type: String, required: true, match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address'] },
   created: { type: Date, required: true },
-  updated: { type: Date},
+  updated: { type: Date },
   status: { type: String, required: true },
-  title: { type: String, required: true, minLength: 10, maxLength: 30 },
-  text: { type: String, required: true, minLength: 20, maxLength: 100 },
-  photo: { type: String },
+  title: { type: String, required: true },
+  text: { type: String, required: true },
+  image: { type: String },
   price: { type: Number },
   phone: { type: String },
   location: { type: String },
-  mail: { type: String },
-  // src: { type: String, required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 module.exports = mongoose.model('Post', postSchema);

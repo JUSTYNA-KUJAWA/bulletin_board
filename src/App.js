@@ -1,19 +1,18 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAllPosts } from './redux/postsRedux';
 import { createTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-
-import { store } from './redux/store';
-
-import { MainLayout } from './components/layout/MainLayout/MainLayout';
-import { Homepage } from './components/views/Homepage/Homepage';
-import { Post } from './components/views/Post/Post';
-import { PostEdit } from './components/views/PostEdit/PostEdit';
-import { PostAdd } from './components/views/PostAdd/PostAdd';
-import { NotFound } from './components/views/NotFound/NotFound';
-import {Switcher} from './components/common/Switcher/Switcher';
+import MainLayout from './components/layout/MainLayout/MainLayout';
+import Homepage from './components/views/Homepage/Homepage';
+import Post from './components/views/Post/Post';
+import PostEdit from './components/views/PostEdit/PostEdit';
+import PostAdd from './components/views/PostAdd/PostAdd';
+import NotFound from './components/views/NotFound/NotFound';
+import UserLoggedPosts from './components/views/UserLoggedPosts/UserLoggedPosts';
+import AllPosts from './components/views/AllPosts/AllPosts';
 
 const theme = createTheme({
   palette: {
@@ -21,26 +20,31 @@ const theme = createTheme({
   },
 });
 
-const App = (props) => (
-  <Provider store={store}>
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(fetchAllPosts()), [dispatch]);
+
+  return (
     <BrowserRouter>
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Switcher />
           <MainLayout>
-            <Switch>
-              <Route exact path='/' component={Homepage} />
-              <Route exact path='/post/add' component={PostAdd} />
-              <Route exact path='/post/:id' component={Post} />
-              <Route exact path='/post/:id/edit' component={PostEdit} />
-              <Route path='*' component={NotFound} />
-            </Switch>
+            <Routes>
+              <Route exact path='/allposts' element={<AllPosts/>} />
+              <Route exact path='/post/add' element={<PostAdd/>} />
+              <Route exact path='/post/:id' element={<Post/>} />
+              <Route exact path='/post/:id/edit' element={<PostEdit/>} />
+              <Route exact path='/userloggedposts' element={<UserLoggedPosts/>} />
+              <Route path='*' element={<NotFound/>} />
+              <Route exact path='/' element={<Homepage/>} />
+            </Routes>
           </MainLayout>
         </ThemeProvider>
       </StylesProvider>
     </BrowserRouter>
-  </Provider>
-);
+  );
+};
 
-export { App };
+export default App;

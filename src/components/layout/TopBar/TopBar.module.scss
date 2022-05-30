@@ -1,0 +1,45 @@
+@import '../../../styles/settings.scss';
+@import '../../../styles/global.scss';
+
+.root {
+    display: flex;
+    justify-content: space-between;
+    background: grey;
+  
+    .icon {
+        font-size: 24px;
+        margin: 5px;
+        color: $color-white;
+        align-items: center;
+        float: right
+    }
+    }
+
+
+@include tablet {
+    .root {
+        height: 10vh;
+        font-size: 24px;
+        .icon {
+            font-size: 32px;
+        }
+    }
+}
+
+@include mobile {
+    .root {
+        flex-direction: column;
+        height: 24vh;
+        .leftBar {
+            padding-top: 3px;
+            justify-content: space-between;
+        }
+        .rightBar {
+            padding-right: 2px;
+            justify-content: center;
+            h2 {
+                margin-right: 10px;
+            }
+        }
+    }
+}

@@ -1,97 +1,105 @@
 /* eslint-disable linebreak-style */
 
-import Axios from 'axios';
+import axios from 'axios';
+import { API_URL } from '../config';
 
 /* selectors */
-export const getAll = ({ posts }) => posts.data;
-export const getPostById = ({ posts }, id) => {
-  return posts.data.filter((post) => post.id === id)[0];
-};
+export const getAll = ({posts}) => (posts.data);
+export const getUserLogedPosts = ({posts}, email) => posts.data.filter(post => post.email === email);
+export const getAllPublished = ({posts}) => posts.data.filter(post => post.status === 'published');
+export const getPost = ({ posts }, postId) => (posts.data).find(post => post._id === postId);
+export const getIsLoading = ({ posts }) => posts.loading;
 
-export const getOnePost = ({ posts }, id) =>
-  posts.data.find((post) => post.id.toString() === id);
 
-export const getLoading = ({ posts }) => posts.loading;
-
-/* action name creator */
 const reducerName = 'posts';
-const createActionName = (name) => `app/${reducerName}/${name}`;
+const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
+const UPDATE_POSTS = createActionName('UPDATE_POSTS');
+
+const ADD_POST = createActionName('ADD_POST');
+const REMOVE_POST = createActionName('REMOVE_POST');
+const UPDATE_POST = createActionName('UPDATE_POST');
+
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
-const ADD_POST = createActionName('ADD_POST');
-const EDIT_POST = createActionName('EDIT_POST');
-const FETCH_ONE_POST = createActionName('FETCH_ONE_POST');
+const FETCH_END = createActionName('FETCH_END');
 
 /* action creators */
-export const fetchStarted = (payload) => ({ payload, type: FETCH_START });
-export const fetchSuccess = (payload) => ({ payload, type: FETCH_SUCCESS });
-export const fetchError = (payload) => ({ payload, type: FETCH_ERROR });
-export const addPost = (payload) => ({ payload, type: ADD_POST });
-export const editPost = (payload) => ({ payload, type: EDIT_POST });
-export const fetchOnePost = (payload) => ({ payload, type: FETCH_ONE_POST });
+export const updatePosts = payload => ({ type: UPDATE_POSTS, payload });
+
+export const addPost = payload => ({ type: ADD_POST, payload });
+export const removePost = payload => ({ type: REMOVE_POST, payload });
+export const updatePost = payload => ({ type: UPDATE_POST, payload });
+
+export const fetchStarted = payload => ({ payload, type: FETCH_START });
+export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
+export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+export const fetchEnded =  payload => ({ payload, type: FETCH_END });
 
 /* thunk creators */
-export const fetchPublished = () => {
-  return (dispatch, getState) => {
-    const { posts } = getState();
-    console.log('posts', posts);
 
-    Axios.get('http://localhost:8000/api/posts')
-      .then((res) => {
+export const fetchAllPosts = () => {
+  return (dispatch) => {
+    dispatch(fetchStarted());
+
+    axios
+      .get(`${API_URL}/posts`)
+      .then(res => {
         dispatch(fetchSuccess(res.data));
+        dispatch(fetchEnded());
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(fetchError(err.message || true));
       });
   };
 };
 
-export const fetchOnePostFromAPI = (_id) => {
-  return (dispatch, getState) => {
+export const addPostRequest = (post) => async dispatch => {
+  try {
     dispatch(fetchStarted());
-    Axios.get(`http://localhost:8000/api/posts/${_id}`)
-      .then((res) => {
-        dispatch(fetchOnePost(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchError(err.message || true));
-      });
-  };
+    const res = await axios({
+      method: 'post',
+      url: `${API_URL}/posts`,
+      data: post,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    dispatch(addPost(res.data));
+    dispatch(fetchEnded());
+  } catch (err) {
+    dispatch(fetchError(err));
+  }
 };
 
-export const fetchAddPost = (post) => {
-  console.log('in fetch post', post);
-
-  return (dispatch, getState) => {
+export const updatePostRequest = (post, id) => async dispatch => {
+  try {
     dispatch(fetchStarted());
-    Axios.post('http://localhost:8000/api/posts/add', post, {
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((res) => {
-        dispatch(addPost(post));
-      })
-      .catch((err) => {
-        dispatch(fetchError(err.message || true));
-      });
-  };
+    const res = await axios({
+      method: 'put',
+      url: `${API_URL}/post/${id}`,
+      data: post,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    dispatch(updatePost(res.data));
+    dispatch(fetchEnded());
+  } catch (err) {
+    dispatch(fetchError(err));
+  }
 };
 
-export const fetchEditPost = (id, post) => {
-  console.log('post w fetchEditPost', post);
-  return (dispatch, getState) => {
+export const removePostRequest = (postId) => {
+  return (dispatch) => {
     dispatch(fetchStarted());
-    Axios.put(`http://localhost:8000/api/posts/${id}/edit`, post, {
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((res) => {
-        dispatch(editPost(id, post));
+
+    axios
+      .delete(`${API_URL}/post/${postId}`)
+      .then(res => {
+        dispatch(removePost(res.data));
+        dispatch(fetchEnded());
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch(fetchError(err.message || true));
-        console.error(err);
       });
   };
 };
@@ -99,12 +107,45 @@ export const fetchEditPost = (id, post) => {
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
+    case UPDATE_POSTS:
+      return { ...statePart, data: [...action.payload] };
+    case ADD_POST:
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+          success: true,
+        },
+        data: [...statePart.data, { ...action.payload}],
+      };
+    case REMOVE_POST:
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+          success: true,
+        },
+        data: statePart.data.filter(post => post._id !== action.payload),
+      };
+    case UPDATE_POST:
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+          success: true,
+        },
+        data: statePart.data.map(post => post._id === action.payload._id ? { ...post, ...action.payload } : post),
+      };
     case FETCH_START: {
       return {
         ...statePart,
         loading: {
           active: true,
           error: false,
+          success: false,
         },
       };
     }
@@ -114,6 +155,7 @@ export const reducer = (statePart = [], action = {}) => {
         loading: {
           active: false,
           error: false,
+          success: true,
         },
         data: action.payload,
       };
@@ -124,40 +166,19 @@ export const reducer = (statePart = [], action = {}) => {
         loading: {
           active: false,
           error: action.payload,
+          success: false,
         },
       };
     }
-    case FETCH_ONE_POST: {
+    case FETCH_END:
       return {
         ...statePart,
         loading: {
           active: false,
           error: false,
+          success: false,
         },
-        onePost: action.payload,
       };
-    }
-    case ADD_POST: {
-      return {
-        ...statePart,
-        loading: {
-          active: false,
-          error: false,
-          changePost: true,
-        },
-        data: [...statePart.data, action.payload],
-      };
-    }
-    case EDIT_POST: {
-      return {
-        ...statePart,
-        data: [
-          ...statePart.data.map((post) =>
-            post._id === action.payload._id ? action.payload : post
-          ),
-        ],
-      };
-    }
     default:
       return statePart;
   }

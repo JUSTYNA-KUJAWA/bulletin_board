@@ -1,17 +1,47 @@
-/* eslint-disable linebreak-style */
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-require('dotenv').config();
+const User = require('../models/user.model');
+
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: process.env.clientID,
+      clientSecret: process.env.clientSecret,
       callbackURL: process.env.callbackURL,
     },
-    (accessToken, refreshToken, profile, done) => {
-      done(null, profile);
-      console.log(profile);
+    function(token, tokenSecret, profile, done) {
+   
+      const { emails, displayName } = profile;
+      const email = emails[0].value;
+
+      User.findOne({ email: { $eq: email } }, (err, userMatch) => {
+        // handle errors here:
+        if (err) {
+          console.log('Error!! trying to find user with email');
+          console.log(err);
+          return done(null, false);
+        }
+        // if there is already someone with that googleId
+        if (userMatch) {
+          return done(null, userMatch);
+        } else {
+    
+          const newGoogleUser = new User({
+            displayName: displayName,
+            email: email,
+          });
+          // save this user
+          newGoogleUser.save((err, savedUser) => {
+            if (err) {
+              console.log('Error!! saving the new google user');
+              console.log(err);
+              return done(null, false);
+            } else {
+              return done(null, savedUser);
+            }
+          }); 
+        }
+      }); 
     }
   )
 );

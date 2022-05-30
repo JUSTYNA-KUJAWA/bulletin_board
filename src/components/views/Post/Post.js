@@ -1,129 +1,96 @@
-/* eslint-disable linebreak-style */
 import React from 'react';
-import PropTypes from 'prop-types';
+
+import { useParams } from 'react-router';
+
+import { Link, useNavigate, Navigate } from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getPost, removePostRequest, getIsLoading } from '../../../redux/postsRedux';
+import { getLoggedUser } from '../../../redux/usersRedux';
+
+import CommonButton from '../CommonButton/CommonButton';
+import OfflineButton from '../OfflineButton/OfflineButton';
+import Circular from '../Circular/Circular';
+
+import PlaceOutlinedIcon from '@material-ui/icons/PlaceOutlined';
+import Container from '@material-ui/core/Container';
+
 import styles from './Post.module.scss';
-import clsx from 'clsx';
-import { connect } from 'react-redux';
-import { getPostById, fetchOnePostFromAPI } from '../../../redux/postsRedux';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import Grid from '@material-ui/core/Grid';
-import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import EditIcon from '@material-ui/icons/Edit';
-import { Link } from 'react-router-dom';
 
-class Component extends React.Component {
-  componentDidMount() {
-    const { fetchOnePost } = this.props;
-    fetchOnePost();
-  }
+import utils from '../../../utils';
 
-  render() {
-    const { className, post} = this.props;
+const Post = () => {
+  const { id } = useParams();
+  const post = useSelector(state => getPost(state, id));
+  const loggedInUser = useSelector(state => getLoggedUser(state));
+  const load = useSelector(state => getIsLoading(state));
 
-    return (
-      <div className={clsx(className, styles.root)}>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-        <Grid container spacing={3} className={styles.postContainer} alignContent="center" justify="center">
-          <Grid item xs={12} sm={5} md={6}>
-            <div className={styles.photoImage}>
-              <img src={post.photo} alt={post.title} />
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={7} md={6} className={styles.content}>
-            <div className={styles.titleWrapper}>
-              <Typography
-                gutterBottom
-                variant='h5'
-                component='h2'
-                className={styles.title}
-              >
-                {post.title}
-              </Typography>
-              <Typography className={styles.postStatus}>{post.status}</Typography>
-              <Link to={`/post/${post.id}/edit`} className={styles.postEdit}>
-                <Typography className={styles.editContent}>Edit</Typography>
-                <EditIcon className={styles.editIcon} />
-              </Link>
-            </div>
-            <Typography
-              variant='body2'
-              color='textSecondary'
-              component='p'
-              className={styles.postDescription}
-            >
-              {post.content}
-            </Typography>
-            <div className={styles.postContact}>
-              <LocalOfferIcon className={styles.contactIcon} />
-              <Typography variant='body2' component='p' className={styles.author}>
-                {post.price} $
-              </Typography>
-            </div>
-            <div className={styles.postContact}>
-              <MailOutlineIcon className={styles.contactIcon} />
-              <Typography variant='body2' component='p' className={styles.author}>
-                {post.email}
-              </Typography>
-            </div>
-            <div className={styles.postContact}>
-              <LocalPhoneIcon className={styles.contactIcon} />
-              <Typography variant='body2' component='p' className={styles.author}>
-                {post.phone}
-              </Typography>
-            </div>
-            <div className={styles.postContact}>
-              <LocationOnIcon className={styles.contactIcon} />
-              <Typography variant='body2' component='p' className={styles.author}>
-                {post.location}
-              </Typography>
-            </div>
-            <div className={styles.icons}>
-              <IconButton aria-label='add to favorites'>
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label='share'>
-                <ShareIcon />
-              </IconButton>
-            </div>
-            <div className={styles.date}>
-              <Typography variant='body2' color='textSecondary' component='p'>
-              Publication: {post.datePublication}
-              </Typography>
-              <Typography variant='body2' color='textSecondary' component='p'>
-              Updated: {post.dateLastUpdate}
-              </Typography>
-            </div>
-          </Grid>
-        </Grid>
+  const removePost = () => {
+    dispatch(removePostRequest(id));
+    navigate('/myposts');
+  };
+
+  const editButton = () => loggedInUser.email === post.email &&
+    <div className={styles.buttons}>
+      <div className={styles.button}>
+        <Link to={`/post/${id}/edit`} className={styles.link}><CommonButton>Edit Post</CommonButton></Link>
       </div>
-    );
-  }
-}
-Component.propTypes = {
-  className: PropTypes.string,
-  params: PropTypes.object,
-  post: PropTypes.object,
-  fetchOnePost: PropTypes.func,
+      <div className={styles.button}>
+        <CommonButton onClick={() => removePost()}>Remove Post</CommonButton>
+      </div>
+    </div>;
+
+  const isDraft = () => post.status === 'draft' &&
+    <div className={styles.draftWarning}>
+      <p>This post is a draft! Click on &apos;Edit Post&apos; to publish.</p>
+    </div>;
+
+  if (!post) return <Navigate to='/' />;
+  return (
+    <Container>
+      { (load.active) && <div className={styles.circular}><Circular /></div> }
+      { ((!load.active && !load.success) || load.error) &&
+        (
+          <div className={styles.root}>
+            <div className={styles.postContainer}>
+              {isDraft()}
+
+              <img alt={post.title} src={post.image ? post.image : 'https://www.freeiconspng.com/uploads/no-image-icon-1.jpg'}/>
+
+              <div className={styles.infoContainer}>
+                <h1>{post.title}</h1>
+                {post.location && (
+                  <div className={styles.address}>
+                    <PlaceOutlinedIcon/>
+                    <h2>{post.location}</h2>
+                  </div>
+                )}
+                <div className={styles.text}>
+                  <p>{post.text}</p>
+                </div>
+                <div className={styles.price}>
+                  <p>{post.price} USD</p>
+                </div>
+                <div className={styles.contactInfo}>
+                  <h3>Contact info:</h3>
+                  <p><span>email:</span> {post.email}</p>
+                  <p><span>phone number:</span> {post.phone}</p>
+                </div>
+                <div className={styles.dates}>
+                  <p>Published: {utils.dateToStr(post.created)} {post.updated && (<span>Edited: {utils.dateToStr(post.updated)}</span>)}</p>
+                </div>
+                {editButton()}
+                <Link to={`/allposts`} className={styles.link}><OfflineButton>Back to posts</OfflineButton></Link>
+              </div>
+            </div>
+          </div>
+        )}
+    </Container>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  post: getPostById(state),
-});
-
-const mapDispatchToProps = (dispatch, props) => ({
-  fetchOnePost: () => dispatch(fetchOnePostFromAPI(props.match.params.id)),
-});
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export {
-  // Component as Post,
-  Container as Post,
-  Component as PostComponent,
-};
+export default Post;
