@@ -13,7 +13,6 @@ const Homepage = () => {
     <div className={styles.root}>
       <Welcome/>
       <ListTitlesPosts />
-     
     </div>
   );
 };

@@ -23,7 +23,7 @@ const UserLoggedPosts = () => {
     (
       <div>
         <h2>Welcome to Bulletin Board!</h2>
-        <h3>Log in with Google or select a role from the dropdown menu in the navigation bar to add and edit posts</h3>
+        <h3>Log in with Google / Select a role from the dropdown menu in the navigation bar / Add and edit posts</h3>
       </div>
     );
 
@@ -32,11 +32,17 @@ const UserLoggedPosts = () => {
       <Link to={`/post/add`} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
     </div>;
 
+const postEditButton = () => loggedInUser.name &&
+<div className={styles.addButton}>
+  <Link to={`/post/1/edit`} className={styles.link}><CommonButton>Edit Post</CommonButton></Link>
+</div>;
+
   return (
     <Container className={styles.root}>
       <div className={styles.welcome}>
         {welcomeMessage()}
         {postAddButton()}
+        {postEditButton()}
       </div>
       <PostsView posts={posts}/>
     </Container>

@@ -3,13 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardMedia, CardActions } from '@material-ui/core';
 
 import OutlinedButton from '../OfflineButton/OfflineButton';
 
 import PropTypes from 'prop-types';
 
-import styles from './SmallCard.module.scss';
+import styles from './SmallCardTitle.module.scss';
 
 import utils from '../../../utils';
 
@@ -20,19 +20,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SmallCard = (props) => {
+const SmallCardTitle = (props) => {
   console.log(props);
-  const isDraft = () => props.status === 'draft' ?
-    `This is a draft!! Not published yet.` :
-    `Published: ${utils.dateToStr(props.created)}`;
-
+  
   const classes = useStyles();
   return (
     <Card className={classes.root} elevation={2}>
       <CardHeader
         className={classes.header}
         title={props.title}
-        subheader={isDraft()}
+        subheader={""}
       />
       <CardMedia
         component="img"
@@ -40,11 +37,6 @@ const SmallCard = (props) => {
         image={props.image ? props.image : 'https://www.freeiconspng.com/uploads/no-image-icon-1.jpg'}
         alt={props.title}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.price} USD
-        </Typography>
-      </CardContent>
       <CardActions>
         <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
@@ -52,14 +44,10 @@ const SmallCard = (props) => {
   );
 };
 
-SmallCard.propTypes = {
+SmallCardTitle .propTypes = {
   title: PropTypes.string.isRequired,
-  created: PropTypes.string,
-  updated: PropTypes.string,
   image: PropTypes.string,
-  price: PropTypes.number,
-  status: PropTypes.string,
   id: PropTypes.string.isRequired,
 };
 
-export default SmallCard;
+export default SmallCardTitle ;
