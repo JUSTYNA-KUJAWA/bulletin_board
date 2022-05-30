@@ -22,7 +22,7 @@ const PostEdit = () => {
 
   const handleSubmit = post => {
     dispatch(updatePostRequest(post, id));
-    navigate('/userloggedposts');
+    navigate('/myposts');
   };
 
   if (!postData) return <Navigate to='/' />;

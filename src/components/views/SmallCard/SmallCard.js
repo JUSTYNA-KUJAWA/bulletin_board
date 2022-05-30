@@ -48,6 +48,9 @@ const SmallCard = (props) => {
       <CardActions>
         <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
+      <CardActions>
+        <Link to={`/postedit/${props.id}`} className={styles.link}><OutlinedButton>Edit Post</OutlinedButton></Link>
+      </CardActions>
     </Card>
   );
 };

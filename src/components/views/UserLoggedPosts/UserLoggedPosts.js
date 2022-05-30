@@ -32,17 +32,11 @@ const UserLoggedPosts = () => {
       <Link to={`/post/add`} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
     </div>;
 
-const postEditButton = () => loggedInUser.name &&
-<div className={styles.addButton}>
-  <Link to={`/post/1/edit`} className={styles.link}><CommonButton>Edit Post</CommonButton></Link>
-</div>;
-
   return (
     <Container className={styles.root}>
       <div className={styles.welcome}>
         {welcomeMessage()}
         {postAddButton()}
-        {postEditButton()}
       </div>
       <PostsView posts={posts}/>
     </Container>
