@@ -1,71 +1,100 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  max-width: 1281px;
-  margin: 0 auto;
-  padding-top: 40px;
+  @include flex(column, center, center);
+  @include height();
+  color: $dark;
 
-  .postImage {
-    width: 100%;
-    height: auto;
+  .spinner {
+    text-align: center;
+    margin: 100px 0;
   }
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    padding-left: 25px;
-    padding-right: 50px;
+  .link {
+    text-decoration: none;
+  }
 
-    .postDescription {
-      padding-bottom: 10px;
-    }
+  .postContainer {
+    width: 750px;
+    margin: 20px 0;
+    padding: 20px 0;
+    background: $light;
+    border-radius: 3%;
+    @include flex(column, center, center);
+    border: solid 1px $secondary-light;
 
-    .postContact {
-      display: flex;
-      flex-direction: row;
-      padding: 5px 0;
-
-      .contactIcon {
-        width: 18px;
-      }
-
-      .author {
-        font-size: 15px;
-        padding-left: 6px;
+    .draftWarning {
+      text-align: center;
+      p {
+        color: $warning;
+        font-size: $base-size;
       }
     }
 
-    .titleWrapper {
-      display: flex;
+    img {
+      max-width: 90%;
+      max-height: 400px;
+      object-fit: cover;
+      overflow: hidden;
+      border-radius: 5%;
+    }
 
-      .postStatus {
-        color: $base-background-color;
-        padding: 10px 30px 0 0;
+    .infoContainer {
+      display: flex;
+      @include flex(column, center, center);
+      width: 100%;
+
+      h1 {
+        color: $secondary-dark;
+        margin: 10px;
       }
 
-      .postEdit {
+      .address {
+        margin: 20px 0;
+        text-align: center;
+        h2 {
+          margin: 5px 0;
+        }
+      }
+      .text {
+        width: 100%;
+        font-size: $base-size;
+        border-top: solid 1px $secondary-light;
+        border-bottom: solid 1px $secondary-light;
+        padding: 20px;
+      }
+      .price {
+        font-size: $base-size +5;
+        font-weight: 700;
+      }
+      .contactInfo {
+        text-align: center;
+        background: $primary-dark;
+        width: 100%;
+        padding: 10px;
+        color: $light;
+        h3 {
+          margin: 5px;
+        }
+        p {
+          margin: 5px;
+        }
+        span {
+          font-weight: 700;
+        }
+      }
+      .dates {
+        padding: 0 20px;
+        color: $secondary-light;
+        span {
+          margin-left: 50px;
+        }
+      }
+      .buttons {
+        margin-bottom: 20px;
         display: flex;
-        flex-direction: row-reverse;
-
-        .editIcon {
-          margin: auto;
-          width: 15px;
-        }
-
-        .editContent {
-          margin: auto;
-          font-size: 14px;
-          padding-left: 4px;
-        }
+        flex-direction: row;
       }
-
-      .title {
-        flex: auto;
-      }
-    }
-
-    .date {
-      margin-top: auto;
     }
   }
 }
