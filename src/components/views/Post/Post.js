@@ -34,7 +34,7 @@ const Post = () => {
     navigate('/myposts');
   };
 
-  const editButton = () => loggedInUser.email === post.email &&
+  const editButton = () => loggedInUser.mail === post.mail &&
     <div className={styles.buttons}>
       <div className={styles.button}>
         <Link to={`/post/${id}/edit`} className={styles.link}><CommonButton>Edit Post</CommonButton></Link>
@@ -77,7 +77,7 @@ const Post = () => {
                 </div>
                 <div className={styles.contactInfo}>
                   <h3>Contact info:</h3>
-                  <p><span>email:</span> {post.email}</p>
+                  <p><span>email:</span> {post.mail}</p>
                   <p><span>phone number:</span> {post.phone}</p>
                 </div>
                 <div className={styles.dates}>

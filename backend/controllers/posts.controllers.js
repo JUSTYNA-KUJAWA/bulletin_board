@@ -29,10 +29,10 @@ exports.getPostById = async (req, res) => {
 };
 
 exports.addNewPost = async (req, res) => {
-  const { email, created, status, title, text, image, price, phone, location } = req.body;
+  const { mail, created, status, title, text, image, price, phone, location } = req.body;
 
   try {
-    const newPost = new Post({ email, created, status, title, text, image, price, phone, location });
+    const newPost = new Post({ mail, created, status, title, text, image, price, phone, location });
     await newPost.save();
     res.json(newPost);
   } catch(err) {
@@ -42,12 +42,12 @@ exports.addNewPost = async (req, res) => {
 };
 
 exports.editPost = async (req, res) => {
-  const { email, created, updated, status, title, text, image, price, phone, location } = req.body;
+  const { mail, created, updated, status, title, text, image, price, phone, location } = req.body;
 
   try {
     const post = await Post.findById(req.params.id);
     if(post){
-      post.email = email;
+      post.mail = mail;
       post.created = created;
       post.updated = updated;
       post.status = status;

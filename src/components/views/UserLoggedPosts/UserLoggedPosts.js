@@ -10,7 +10,7 @@ import styles from './UserLoggedPosts.module.scss';
 
 const UserLoggedPosts = () => {
   const loggedInUser = useSelector(state => getLoggedUser(state));
-  const posts = useSelector(state => getUserLogedPosts(state, loggedInUser.email));
+  const posts = useSelector(state => getUserLogedPosts(state, loggedInUser.mail));
 
   const welcomeMessage = () => loggedInUser.name ?
     (

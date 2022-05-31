@@ -6,7 +6,7 @@ import { API_URL } from '../config';
 /* selectors */
 export const getAll = ({posts}) => (posts.data);
 export const getMyPosts = ({posts}, mail) => posts.data.filter(post => post.mail === mail);
-export const getUserLogedPosts = ({posts}, email) => posts.data.filter(post => post.email === email);
+export const getUserLogedPosts = ({posts}, mail) => posts.data.filter(post => post.mail === mail);
 export const getAllPublished = ({posts}) => posts.data.filter(post => post.status === 'published');
 export const getPost = ({ posts }, postId) => (posts.data).find(post => post._id === postId);
 export const getIsLoading = ({ posts }) => posts.loading;

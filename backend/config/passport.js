@@ -11,10 +11,10 @@ passport.use(
     },
     function(token, tokenSecret, profile, done) {
    
-      const { emails, displayName } = profile;
-      const email = emails[0].value;
+      const { mails, displayName } = profile;
+      const mail = mails[0].value;
 
-      User.findOne({ email: { $eq: email } }, (err, userMatch) => {
+      User.findOne({ mail: { $eq: mail } }, (err, userMatch) => {
         // handle errors here:
         if (err) {
           console.log('Error!! trying to find user with email');
@@ -28,7 +28,7 @@ passport.use(
     
           const newGoogleUser = new User({
             displayName: displayName,
-            email: email,
+            mail: mail,
           });
           // save this user
           newGoogleUser.save((err, savedUser) => {

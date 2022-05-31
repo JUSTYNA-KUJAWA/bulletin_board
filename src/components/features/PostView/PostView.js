@@ -20,7 +20,7 @@ const PostsView = ({ posts }) => {
               text={post.text}
               created={post.created}
               updated={post.updated}
-              email={post.email}
+              mail={post.mail}
               status={post.status}
               image={post.image}
               price={post.price}

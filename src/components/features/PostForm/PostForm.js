@@ -38,7 +38,7 @@ const PostForm = (props) => {
   const created = props.created || new Date();
   const isUpdated = () => props.actionText === 'edit' ? new Date() : undefined;
   const updated = isUpdated();
-  const email = loggedInUser.email;
+  const mail = loggedInUser.mail;
 
   // Image handling
   const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
@@ -95,10 +95,10 @@ const PostForm = (props) => {
   // Actions on form ubmit
 
   const handleSubmit = () => {
-    const post = { title, text, created, updated, email, status, image, price, phone, location };
+    const post = { title, text, created, updated, mail, status, image, price, phone, location };
     const formData = new FormData();
 
-    for(let key of ['title', 'text', 'created', 'updated','email', 'status', 'image', 'price', 'phone', 'location']) {
+    for(let key of ['title', 'text', 'created', 'updated','mail', 'status', 'image', 'price', 'phone', 'location']) {
       formData.append(key, post[key]);
     }
     props.action(formData);

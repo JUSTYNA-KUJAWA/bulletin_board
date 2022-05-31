@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   const handleRoleChange = (event) => {
     if(event.target.value === 'loggedUser'){
       const user = {
-        name: 'Logged User',
-        email: 'loggedUser@example.com',
+        name: 'Justyna Kujawa',
+        mail: 'admin@gmail.com',
         role: 'loggedUser',
       };
       dispatch(loginUser(user));

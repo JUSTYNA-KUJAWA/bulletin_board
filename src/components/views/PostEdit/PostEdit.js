@@ -1,16 +1,10 @@
 import React from 'react';
-
 import { useParams } from 'react-router';
-
 import { useNavigate, Navigate } from 'react-router-dom';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import { updatePostRequest } from '../../../redux/postsRedux';
 import { getPost } from '../../../redux/postsRedux';
-
 import PostForm from '../../features/PostForm/PostForm';
-
 import styles from './PostEdit.module.scss';
 
 const PostEdit = () => {
