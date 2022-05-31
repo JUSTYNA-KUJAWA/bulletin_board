@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { getMyPosts } from '../../../redux/postsRedux';
 import { getLoggedUser } from '../../../redux/usersRedux';
-import PostView from '../../features/PostView/PostView';
+import PostViewMyPosts from '../../features/PostViewMyPosts/PostViewMyPosts';
 import Container from '@material-ui/core/Container';
 import styles from './MyPosts.module.scss';
 
@@ -13,7 +13,7 @@ const MyPosts = () => {
 
   return (
     <Container className={styles.root}>
-      <PostView posts={posts}/>
+      <PostViewMyPosts posts={posts}/>
     </Container>
   );
 };

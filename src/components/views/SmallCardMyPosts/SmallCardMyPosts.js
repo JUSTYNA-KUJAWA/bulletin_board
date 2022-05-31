@@ -9,7 +9,7 @@ import OutlinedButton from '../OfflineButton/OfflineButton';
 
 import PropTypes from 'prop-types';
 
-import styles from './SmallCard.module.scss';
+import styles from './SmallCardMyPosts.module.scss';
 
 import utils from '../../../utils';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SmallCard = (props) => {
+const SmallCardMyPosts = (props) => {
   console.log(props);
   const isDraft = () => props.status === 'draft' ?
     `This is a draft!! Not published yet.` :
@@ -48,11 +48,14 @@ const SmallCard = (props) => {
       <CardActions>
         <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
+      <CardActions>
+        <Link to={`/postedit/${props.id}`} className={styles.link}><OutlinedButton>Edit Post</OutlinedButton></Link>
+      </CardActions>
     </Card>
   );
 };
 
-SmallCard.propTypes = {
+SmallCardMyPosts.propTypes = {
   title: PropTypes.string.isRequired,
   created: PropTypes.string,
   updated: PropTypes.string,
@@ -62,4 +65,4 @@ SmallCard.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default SmallCard;
+export default SmallCardMyPosts;

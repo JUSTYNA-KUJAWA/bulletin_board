@@ -14,7 +14,7 @@ const PostTitle = () => {
 console.log(postTitle);
   return (
     <div className={styles.root}>
-      <h2>The newest announce</h2>
+      <h2>The newest announces</h2>
       <Grid container spacing={3}>
         {postTitle.map(post => (
           <Grid item xs={12} sm={4} key={post._id}>
