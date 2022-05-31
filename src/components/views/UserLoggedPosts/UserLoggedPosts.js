@@ -7,8 +7,10 @@ import PostsView from '../../features/PostView/PostView';
 import CommonButton from '../CommonButton/CommonButton';
 import Container from '@material-ui/core/Container';
 import styles from './UserLoggedPosts.module.scss';
+import {IconButton } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const UserLoggedPosts = () => {
+const UserLoggedPosts = ({userStatus}) => {
   const loggedInUser = useSelector(state => getLoggedUser(state));
   const posts = useSelector(state => getUserLogedPosts(state, loggedInUser.mail));
 
@@ -29,7 +31,23 @@ const UserLoggedPosts = () => {
 
   const postAddButton = () => loggedInUser.name &&
     <div className={styles.addButton}>
-      <Link to={`/post/add`} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
+      <Link to={`/myposts`} className={styles.link}><CommonButton>My posts</CommonButton></Link>
+      <Link to={`/allposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
+      {!userStatus && (
+          
+          <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                color='inherit'
+                component={Link}
+                to={'/'}
+              >
+                <AccountCircle />
+                Logout
+              </IconButton>
+            
+         )}   
     </div>;
 
   return (
@@ -37,6 +55,7 @@ const UserLoggedPosts = () => {
       <div className={styles.welcome}>
         {welcomeMessage()}
         {postAddButton()}
+        
       </div>
       <PostsView posts={posts}/>
     </Container>

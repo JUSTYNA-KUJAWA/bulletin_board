@@ -22,7 +22,7 @@ const PostAdd = () => {
     navigate('/userloggedposts');
   };
 
-  if (!loggedInUser) return <Navigate to='/' />;
+  if (!loggedInUser) return <Navigate to='*' />;
   return (
     <div className={styles.root}>
       <PostForm

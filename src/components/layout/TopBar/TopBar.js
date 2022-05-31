@@ -5,12 +5,25 @@ import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 import styles from './TopBar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LoginSelect from '../../features/LoginSelect/LoginSelect';
+import {IconButton } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const TopBar = ({className}) => {
+const TopBar = ({className, userStatus}) => {
 
   return (
     <div className={clsx(className, styles.root)}>
       <LoginSelect/>
+      {!userStatus && (
+             <IconButton
+               aria-label='account of current user'
+               aria-controls='menu-appbar'
+               aria-haspopup='true'
+               color='inherit'
+               href='https://google.com'
+             >
+               <AccountCircle /> Login
+             </IconButton>
+             )}  
         <div className={styles.iconBox}>
           <a href="https://facebook.com">
             <FontAwesomeIcon className={styles.icon} icon={faFacebook}></FontAwesomeIcon>
@@ -29,6 +42,7 @@ const TopBar = ({className}) => {
 
 TopBar.propTypes = {
   className: PropTypes.string,
+  userStatus:PropTypes.string,
 };
 
 
