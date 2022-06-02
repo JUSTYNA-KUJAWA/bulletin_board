@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardMedia, CardActions } from '@material-ui/core';
-import CommonButton from '../CommonButton/CommonButton';
 import OutlinedButton from '../OfflineButton/OfflineButton';
 import PropTypes from 'prop-types';
 import styles from './SmallCardTitle.module.scss';
@@ -40,7 +39,7 @@ const SmallCardTitle = (props) => {
   );
 };
 
-SmallCardTitle .propTypes = {
+SmallCardTitle.propTypes={
   title: PropTypes.string.isRequired,
   image: PropTypes.string,
   id: PropTypes.string.isRequired,

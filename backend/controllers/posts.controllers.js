@@ -31,13 +31,12 @@ exports.getPostById = async (req, res) => {
 exports.addNewPost = async (req, res) => {
   const { mail, created, status, title, text, image, price, phone, location } = req.body;
 
-  try {
-    const newPost = new Post({ mail, created, status, title, text, image, price, phone, location });
-    await newPost.save();
-    res.json(newPost);
-  } catch(err) {
-    if(NODE_ENV === 'production') console.log('Database error...');
-    else res.status(500).json(err);
+  if (mail && created && status && title && text && image && price && phone  && location && req.file) {
+    console.log(req);
+    res.render('posts', { projectFileName: req.file.originalname, isSent: true });
+  }
+  else {
+    res.render('posts', { isError: true });
   }
 };
 

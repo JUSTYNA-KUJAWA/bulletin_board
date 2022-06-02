@@ -40,10 +40,6 @@ const PostForm = (props) => {
   const updated = isUpdated();
   const mail = loggedInUser.mail;
 
-  // Image handling
-  const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
-  const cloudName = process.env.REACT_APP_CLOUD_NAME;
-
   const [image, setImage] = useState(props.image || '');
   const [imageSelected, setImageSelected ] = useState('');
   const [imageError, setImageError] = useState(false);
@@ -60,12 +56,7 @@ const PostForm = (props) => {
   const handleImageUpload = () => {
     const data = new FormData();
     data.append('file', imageSelected);
-    data.append('upload_preset', `${uploadPreset}`);
-    data.append('cloud_name', `${cloudName}`);
-    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,{
-      method: 'post',
-      body: data,
-    })
+    fetch()
       .then(resp => resp.json())
       .then(data => {
         setImage(data.url);

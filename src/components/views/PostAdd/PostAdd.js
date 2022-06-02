@@ -1,14 +1,9 @@
 import React from 'react';
-
 import { Navigate, useNavigate } from 'react-router-dom';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import { getLoggedUser} from '../../../redux/usersRedux';
 import { addPostRequest } from '../../../redux/postsRedux';
-
 import PostForm from '../../features/PostForm/PostForm';
-
 import styles from './PostAdd.module.scss';
 
 const PostAdd = () => {
