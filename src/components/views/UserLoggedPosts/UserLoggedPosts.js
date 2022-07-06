@@ -34,7 +34,6 @@ const UserLoggedPosts = ({userStatus}) => {
       <Link to={`/myposts`} className={styles.link}><CommonButton>My posts</CommonButton></Link>
       <Link to={`/allposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
       {!userStatus && (
-          
           <IconButton
                 aria-label='account of current user'
                 aria-controls='menu-appbar'
@@ -43,10 +42,9 @@ const UserLoggedPosts = ({userStatus}) => {
                 component={Link}
                 to={'/'}
               >
-                <AccountCircle />
+              <AccountCircle />
                 Logout
-              </IconButton>
-            
+              </IconButton>  
          )}   
     </div>;
 
@@ -55,7 +53,6 @@ const UserLoggedPosts = ({userStatus}) => {
       <div className={styles.welcome}>
         {welcomeMessage()}
         {postAddButton()}
-        
       </div>
       <PostsView posts={posts}/>
     </Container>

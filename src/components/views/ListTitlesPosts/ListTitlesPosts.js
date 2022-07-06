@@ -8,7 +8,6 @@ const ListTitlesPosts = () => {
   useEffect(() => {
     window.scrollTo(0,0);
   }, []);
-
   return (
     <Container className={styles.root}>
       <PostTitle/>
@@ -18,6 +17,5 @@ const ListTitlesPosts = () => {
 ListTitlesPosts.propTypes = {
   className: PropTypes.string,
 };
-
 
 export default ListTitlesPosts;

@@ -58,7 +58,7 @@
       }
       .text {
         width: 100%;
-        font-size: $base-size;
+        font-size: 20px;
         border-top: solid 1px $secondary-light;
         border-bottom: solid 1px $secondary-light;
         padding: 20px;
@@ -85,7 +85,7 @@
       }
       .dates {
         padding: 0 20px;
-        color: $secondary-light;
+        color: rgb(4, 55, 20);
         span {
           margin-left: 50px;
         }

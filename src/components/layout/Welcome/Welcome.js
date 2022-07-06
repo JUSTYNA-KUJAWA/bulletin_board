@@ -7,8 +7,8 @@ import styles from './Welcome.module.scss';
 const Welcome = () => {
   return (
     <div className={styles.root}>
-    <Logo></Logo>
-    <Link to={`/post/add`} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
+      <Logo></Logo>
+      <Link to={`/post/add`} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
     </div>
   );
 };

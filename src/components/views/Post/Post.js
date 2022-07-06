@@ -1,23 +1,15 @@
 import React from 'react';
-
 import { useParams } from 'react-router';
-
 import { Link, useNavigate, Navigate } from 'react-router-dom';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import { getPost, removePostRequest, getIsLoading } from '../../../redux/postsRedux';
 import { getLoggedUser } from '../../../redux/usersRedux';
-
 import CommonButton from '../CommonButton/CommonButton';
 import OfflineButton from '../OfflineButton/OfflineButton';
 import Circular from '../Circular/Circular';
-
 import PlaceOutlinedIcon from '@material-ui/icons/PlaceOutlined';
 import Container from '@material-ui/core/Container';
-
 import styles from './Post.module.scss';
-
 import utils from '../../../utils';
 
 const Post = () => {
@@ -58,9 +50,7 @@ const Post = () => {
           <div className={styles.root}>
             <div className={styles.postContainer}>
               {isDraft()}
-
               <img alt={post.title} src={post.image ? post.image : 'https://www.freeiconspng.com/uploads/no-image-icon-1.jpg'}/>
-
               <div className={styles.infoContainer}>
                 <h1>{post.title}</h1>
                 {post.location && (

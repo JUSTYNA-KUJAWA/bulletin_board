@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className={styles.root}>
       <NavBar/>
-      </div>
+    </div>
   );
 };
 

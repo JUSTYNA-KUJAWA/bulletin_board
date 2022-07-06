@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SmallCardTitle = (props) => {
   console.log(props);
-  
   const classes = useStyles();
   return (
     <Card className={classes.root} elevation={2}>
@@ -34,7 +33,6 @@ const SmallCardTitle = (props) => {
       <CardActions>
         <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
-      
     </Card>
   );
 };

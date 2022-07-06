@@ -9,7 +9,6 @@ import {IconButton } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const TopBar = ({className, userStatus}) => {
-
   return (
     <div className={clsx(className, styles.root)}>
       <LoginSelect/>
@@ -35,8 +34,7 @@ const TopBar = ({className, userStatus}) => {
             <FontAwesomeIcon className={styles.icon} icon={faTwitter}></FontAwesomeIcon>
           </a>
         </div>
-      </div>
-    
+      </div>    
   );
 };
 
@@ -44,7 +42,5 @@ TopBar.propTypes = {
   className: PropTypes.string,
   userStatus:PropTypes.string,
 };
-
-
 
 export default TopBar;

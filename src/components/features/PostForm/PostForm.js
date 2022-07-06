@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-
 import { getLoggedUser } from '../../../redux/usersRedux';
 import { getIsLoading } from '../../../redux/postsRedux';
-
 import { TextField, Button } from '@material-ui/core';
-
-import ImageUploader from 'react-images-upload';
 import { useForm } from 'react-hook-form';
-
 import CommonButton from '../../views/CommonButton/CommonButton';
 import Circular from '../../views/Circular/Circular';
-
+import ImageUploader from 'react-images-upload';
 import styles from './PostForm.module.scss';
-
-import PropTypes from 'prop-types';
 
 const PostForm = (props) => {
   // Form validation

@@ -1,12 +1,9 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../../views/Footer/Footer';
 import TopBar from '../TopBar/TopBar';
-
 import styles from './MainLayout.module.scss';
-
-import PropTypes from 'prop-types';
 
 const MainLayout = ({ children }) => {
   return (

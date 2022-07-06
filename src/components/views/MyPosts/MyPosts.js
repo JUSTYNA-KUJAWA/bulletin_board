@@ -10,7 +10,6 @@ const MyPosts = () => {
   const loggedInUser = useSelector(state => getLoggedUser(state));
   const posts = useSelector(state => getMyPosts(state, loggedInUser.mail));
   console.log(posts);
-
   return (
     <Container className={styles.root}>
       <PostViewMyPosts posts={posts}/>

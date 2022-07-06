@@ -9,20 +9,19 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-  const LoginSelect = ({ className}) => {
-    const classes = useStyles();
-
+const LoginSelect = ({ className}) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedInUser = useSelector(state => getLoggedUser(state));
@@ -64,19 +63,18 @@ const useStyles = makeStyles((theme) => ({
       </FormControl>
     )
     : null;
-  return (
-    <div className={clsx(className, styles.root)}>
-        <div className={styles.navlinks}>
-        {loginSelect()}
-        </div>
-      </div>
-  
-  );
+return (
+  <div className={clsx(className, styles.root)}>
+    <div className={styles.navlinks}>
+      {loginSelect()}
+    </div>
+  </div>
+
+);
 };
 
 LoginSelect.propTypes = {
-    className: PropTypes.string,
-  };
+  className: PropTypes.string,
+};
   
-  
-  export default LoginSelect;
+export default LoginSelect;

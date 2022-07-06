@@ -1,24 +1,27 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography } from '@material-ui/core';
-
 import OutlinedButton from '../OfflineButton/OfflineButton';
-
 import PropTypes from 'prop-types';
-
 import styles from './SmallCard.module.scss';
-
 import utils from '../../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 375,
     paddingBottom: 10,
+    fontWeight: "bold",
   },
-}));
+  header: {
+    fontWeight: theme.typography.fontWeightBold,
+  },
+  price: {
+    fontWeight: "bold",
+  }
+  
+  }
+));
 
 const SmallCard = (props) => {
   console.log(props);
@@ -41,7 +44,7 @@ const SmallCard = (props) => {
         alt={props.title}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="subtitle1" color="primary" component="p" className={classes.price}>
           {props.price} USD
         </Typography>
       </CardContent>

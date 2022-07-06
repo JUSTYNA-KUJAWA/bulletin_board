@@ -1,16 +1,10 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Typography } from '@material-ui/core';
-
 import OutlinedButton from '../OfflineButton/OfflineButton';
-
 import PropTypes from 'prop-types';
-
 import styles from './SmallCardMyPosts.module.scss';
-
 import utils from '../../../utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +43,7 @@ const SmallCardMyPosts = (props) => {
         <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
       <CardActions>
-      <Link to={`/post/${props.id}/edit`} className={styles.link}><OutlinedButton>Edit Post</OutlinedButton></Link>
+        <Link to={`/post/${props.id}/edit`} className={styles.link}><OutlinedButton>Edit Post</OutlinedButton></Link>
       </CardActions>
     </Card>
   );

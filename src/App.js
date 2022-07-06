@@ -25,7 +25,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => dispatch(fetchAllPosts()), [dispatch]);
-
   return (
     <BrowserRouter>
       <StylesProvider injectFirst>

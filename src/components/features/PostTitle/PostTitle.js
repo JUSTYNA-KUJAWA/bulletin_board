@@ -7,7 +7,6 @@ import { Grid } from '@material-ui/core/';
 import { useSelector } from 'react-redux';
 import { getAllPublished } from '../../../redux/postsRedux';
 
-
 const PostTitle = () => {
   const posts = useSelector(state => getAllPublished(state));
   const postTitle = posts.slice(0, 2);

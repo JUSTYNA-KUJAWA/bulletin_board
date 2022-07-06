@@ -1,11 +1,7 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Grid } from '@material-ui/core/';
-
 import SmallCardMyPosts from '../../views/SmallCardMyPosts/SmallCardMyPosts';
-
 import styles from './PostViewMyPosts.module.scss';
 
 const PostsViewMyPosts = ({ posts }) => {

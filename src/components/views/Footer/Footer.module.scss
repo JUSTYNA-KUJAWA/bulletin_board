@@ -4,11 +4,11 @@
   margin-top: 40px;
   min-height: 80px;
   padding: 5px 25px;
-  background-color: $main;
+  background-color: white;
   @include flex(row, center, center);
 
   p {
-    color: $light;
+    color: black;
     font-size: $base-size;
     font-weight: 700;
   }
@@ -17,7 +17,7 @@
 @media (max-width: 820px) {
   .root {
     p {
-      color: $light;
+      color: black;
       font-size: 10px;
       font-weight: 700;
     }
