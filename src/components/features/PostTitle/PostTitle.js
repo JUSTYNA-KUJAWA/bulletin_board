@@ -25,7 +25,7 @@ console.log(postTitle);
           </Grid>
         ))}
       </Grid>
-      <Link to={`/allposts`} className={styles.link}><CommonButton>View all</CommonButton></Link>
+      <Link to={`/posts`} className={styles.link}><CommonButton>View all</CommonButton></Link>
     </div>
   );
 };

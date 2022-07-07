@@ -16,7 +16,7 @@ import NotFound from './components/views/NotFound/NotFound';
 import UserLoggedPosts from './components/views/UserLoggedPosts/UserLoggedPosts';
 import AllPosts from './components/views/AllPosts/AllPosts';
 import AllMyPosts from './components/views/AllMyPosts/AllMyPosts';
-import MyPosts from './components/views/MyPosts/MyPosts';
+import PostsHomePage from './components/views/PostsHomePage/PostsHomePage';
 
 const theme = createTheme({
   palette: {
@@ -37,7 +37,7 @@ const App = () => {
             <Routes>
               <Route exact path='/allposts' element={<AllPosts/>} />
               <Route exact path='/allmyposts' element={<AllMyPosts/>} />
-              <Route exact path='/myposts' element={<MyPosts/>} />
+              <Route exact path='/posts' element={<PostsHomePage/>} />
               <Route exact path='/post/add' element={<PostAdd/>} />
               <Route exact path='/post/:id' element={<Post/>} />
               <Route exact path='/post1/:id' element={<PostMy/>} />

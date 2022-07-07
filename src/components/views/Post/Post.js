@@ -74,7 +74,7 @@ const Post = () => {
                   <p>Published: {utils.dateToStr(post.created)} {post.updated && (<span>Edited: {utils.dateToStr(post.updated)}</span>)}</p>
                 </div>
                 {editButton()}
-                <Link to={`/allposts`} className={styles.link}><OfflineButton>Back to posts</OfflineButton></Link>
+                <Link to={`/posts`} className={styles.link}><OfflineButton>Back to posts</OfflineButton></Link>
               </div>
             </div>
           </div>
