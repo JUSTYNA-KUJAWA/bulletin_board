@@ -9,10 +9,26 @@ import utils from '../../../utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 375,
     paddingBottom: 10,
+    "& .MuiCardHeader-subheader": {
+      fontSize: '25pt',
+      fontWeight: "bold"
+    },
   },
-}));
+  header: {
+    fontWeight: theme.typography.fontWeightBold,
+    "& .MuiCardHeader-subheader": {
+      fontSize: '12pt',
+      fontWeight: "bold", 
+    },
+  },
+  price: {
+    fontWeight: "bold",
+  }
+  
+  }
+));
 
 const SmallCardMyPosts = (props) => {
   console.log(props);
@@ -40,10 +56,7 @@ const SmallCardMyPosts = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
-      </CardActions>
-      <CardActions>
-        <Link to={`/post/${props.id}/edit`} className={styles.link}><OutlinedButton>Edit Post</OutlinedButton></Link>
+        <Link to={`/post2/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
     </Card>
   );

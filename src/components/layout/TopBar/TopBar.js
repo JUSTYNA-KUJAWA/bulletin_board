@@ -11,7 +11,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 const TopBar = ({className, userStatus}) => {
   return (
     <div className={clsx(className, styles.root)}>
-      <LoginSelect/>
+      <LoginSelect />
       {!userStatus && (
              <IconButton
                aria-label='account of current user'
@@ -20,7 +20,8 @@ const TopBar = ({className, userStatus}) => {
                color='inherit'
                href='https://google.com'
              >
-               <AccountCircle /> Login
+               <AccountCircle style={{ fontSize: 45 }} /> 
+               <p>Login</p>
              </IconButton>
              )}  
         <div className={styles.iconBox}>

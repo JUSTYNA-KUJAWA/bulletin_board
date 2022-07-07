@@ -15,7 +15,7 @@ const NavBar = () => (
       component={Link}
       to={'/'}
     >
-    <HomeIcon style={{ color: teal[800] }} />
+    <HomeIcon style={{ color: teal[800] , fontSize: 45 }} />
       <h3>Bulletin Board- Locations holidays</h3>
     </IconButton>  
      </div>

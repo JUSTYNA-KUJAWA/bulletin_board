@@ -68,10 +68,10 @@ exports.editPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    const post = Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id);
     if(post){
       await Post.deleteOne({ _id: req.params.id });
-      res.json(req.params.id);
+      res.json(post);
     } else res.status(404).json({ message: 'Not found' });
   }
   catch(err) {

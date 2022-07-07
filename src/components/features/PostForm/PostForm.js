@@ -103,7 +103,9 @@ const PostForm = (props) => {
         (
           <div className={styles.form}>
             <TextField
-              style={{ width: '100%', marginBottom: '10px' }}
+              style={{ width: '100%', marginBottom: '10px', "& .MuiTextField-root": {
+                fontSize: '50px',
+              }}}
               {...register('title', { required: true, maxLength: 200 })}
               type='text'
               label='title'
@@ -126,7 +128,9 @@ const PostForm = (props) => {
             {isImageError()}
             {isImage()}
             <TextField
-              style={{ width: '100%', marginTop: '30px', marginBottom: '10px'}}
+              style={{ width: '100%', marginTop: '30px', marginBottom: '10px', "& .MuiTextField-root": {
+                fontSize: '50pt',
+              }}}
               {...register('text', { required: true, maxLength: 1000 })}
               required
               type='text'
@@ -139,7 +143,7 @@ const PostForm = (props) => {
             />
             {errors.text && <span className={styles.error}>This field is required. Text can have up to 1000 characters.</span>}
             <TextField
-              style={{ width: '200px', margin: '5px' }}
+              style={{ width: '300px', margin: '5px' }}
               {...register('price', { required: true, min: 0 })}
               required
               type='text'
@@ -151,7 +155,7 @@ const PostForm = (props) => {
             {errors.price && <span className={styles.error}>Price is required.</span>}
             <TextField
               {...register('phone', {required: true, max: 11, min: 11, maxLength: 11, pattern: /^\d{3}-\d{3}-\d{3}$/})}
-              style={{ width: '200px', margin: '5px' }}
+              style={{ width: '300px', margin: '5px' }}
               type='text'
               label='phone number'
               variant='outlined'
@@ -161,7 +165,7 @@ const PostForm = (props) => {
             />
             {errors.phone && <span className={styles.error}>Please enter phone number in the correct format.</span>}
             <TextField
-              style={{ width: '200px', margin: '5px' }}
+              style={{ width: '300px', margin: '5px', fontWeight: "bold" }}
               type='text'
               label='location'
               variant='outlined'

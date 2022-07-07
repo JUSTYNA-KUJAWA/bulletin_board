@@ -10,9 +10,9 @@
   }
 
   .imageContainer {
-    height: 150px;
-    width: 250px;
-    margin-bottom: 30px;
+    height: 250px;
+    width: 350px;
+    margin-bottom: 40px;
     img {
       width: 100%;
       height: 100%;
@@ -33,16 +33,20 @@
     @include flex(column, center, center);
     background: $light;
     border-radius: 3%;
+    font-size: 15px;
+    font-weight: 600;
 
     .imageUploader {
-      width: 70%;
+      width: 100%;
     }
     .buttons {
       margin: 20px 0;
       @include flex(row, center, center)
     }
   }
+  
 }
+
 
 @media (max-width: 576px) {
   .root {

@@ -9,10 +9,10 @@ import OfflineButton from '../OfflineButton/OfflineButton';
 import Circular from '../Circular/Circular';
 import PlaceOutlinedIcon from '@material-ui/icons/PlaceOutlined';
 import Container from '@material-ui/core/Container';
-import styles from './Post.module.scss';
+import styles from './PostMy.module.scss';
 import utils from '../../../utils';
 
-const Post = () => {
+const PostMy= () => {
   const { id } = useParams();
   const post = useSelector(state => getPost(state, id));
   const loggedInUser = useSelector(state => getLoggedUser(state));
@@ -74,7 +74,7 @@ const Post = () => {
                   <p>Published: {utils.dateToStr(post.created)} {post.updated && (<span>Edited: {utils.dateToStr(post.updated)}</span>)}</p>
                 </div>
                 {editButton()}
-                <Link to={`/allposts`} className={styles.link}><OfflineButton>Back to posts</OfflineButton></Link>
+                <Link to={`/myposts`} className={styles.link}><OfflineButton>Back to posts</OfflineButton></Link>
               </div>
             </div>
           </div>
@@ -83,4 +83,4 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostMy;

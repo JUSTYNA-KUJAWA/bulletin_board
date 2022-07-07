@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUserLogedPosts} from '../../../redux/postsRedux';
 import { getLoggedUser } from '../../../redux/usersRedux';
-import PostsView from '../../features/PostView/PostView';
+import PostViewMyPosts from '../../features/PostViewMyPosts/PostViewMyPosts';
 import CommonButton from '../CommonButton/CommonButton';
 import Container from '@material-ui/core/Container';
 import styles from './UserLoggedPosts.module.scss';
@@ -32,7 +32,7 @@ const UserLoggedPosts = ({userStatus}) => {
   const postAddButton = () => loggedInUser.name &&
     <div className={styles.addButton}>
       <Link to={`/myposts`} className={styles.link}><CommonButton>My posts</CommonButton></Link>
-      <Link to={`/allposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
+      <Link to={`/allmyposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
       {!userStatus && (
           <IconButton
                 aria-label='account of current user'
@@ -54,7 +54,7 @@ const UserLoggedPosts = ({userStatus}) => {
         {welcomeMessage()}
         {postAddButton()}
       </div>
-      <PostsView posts={posts}/>
+      <PostViewMyPosts posts={posts}/>
     </Container>
   );
 };

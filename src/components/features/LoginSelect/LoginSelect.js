@@ -10,13 +10,13 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow:31,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(5),
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 3,
   },
 }));
 
@@ -57,8 +57,8 @@ const LoginSelect = ({ className}) => {
             select: classes.redColor,
           }}
         >
-          <MenuItem value={'guest'}>Guest</MenuItem>
-          <MenuItem value={'loggedUser'}>LoggedUser</MenuItem>
+          <MenuItem value={'guest'} style={{ fontSize: 20 }}>Guest</MenuItem>
+          <MenuItem value={'loggedUser'} style={{ fontSize: 20 }}>LoggedUser</MenuItem>
         </Select>
       </FormControl>
     )

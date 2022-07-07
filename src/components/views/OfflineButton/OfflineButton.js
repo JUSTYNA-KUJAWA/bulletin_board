@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const OfflineButton = (props) => {
   const useStyles = makeStyles((theme) => ({
     root: {
-      borderRadius: 3,
+      borderRadius: 4,
       border: `solid 2px ${theme.palette.primary.dark}`,
       height: 48,
       padding: '0 30px',
@@ -15,7 +15,8 @@ const OfflineButton = (props) => {
     },
     label: {
       color: `${theme.palette.primary.dark}`,
-      fontSize: 15,
+      fontSize: 18,
+      fontWeight: "bold",
     },
   }));
 

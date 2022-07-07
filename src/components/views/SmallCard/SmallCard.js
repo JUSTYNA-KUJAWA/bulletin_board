@@ -11,10 +11,17 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 375,
     paddingBottom: 10,
-    fontWeight: "bold",
+    "& .MuiCardHeader-subheader": {
+      fontSize: '25pt',
+      fontWeight: "bold"
+    },
   },
   header: {
     fontWeight: theme.typography.fontWeightBold,
+    "& .MuiCardHeader-subheader": {
+      fontSize: '12pt',
+      fontWeight: "bold", 
+    },
   },
   price: {
     fontWeight: "bold",
@@ -45,7 +52,7 @@ const SmallCard = (props) => {
       />
       <CardContent>
         <Typography variant="subtitle1" color="primary" component="p" className={classes.price}>
-          {props.price} USD
+         Price: {props.price} USD / day
         </Typography>
       </CardContent>
       <CardActions>
@@ -66,3 +73,5 @@ SmallCard.propTypes = {
 };
 
 export default SmallCard;
+
+

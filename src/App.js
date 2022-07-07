@@ -8,11 +8,14 @@ import { CssBaseline } from '@material-ui/core';
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import Homepage from './components/views/Homepage/Homepage';
 import Post from './components/views/Post/Post';
+import PostMy from './components/views/PostMy/PostMy';
 import PostEdit from './components/views/PostEdit/PostEdit';
 import PostAdd from './components/views/PostAdd/PostAdd';
+import BackPostMy from './components/views/BackPostMy/BackPostMy';
 import NotFound from './components/views/NotFound/NotFound';
 import UserLoggedPosts from './components/views/UserLoggedPosts/UserLoggedPosts';
 import AllPosts from './components/views/AllPosts/AllPosts';
+import AllMyPosts from './components/views/AllMyPosts/AllMyPosts';
 import MyPosts from './components/views/MyPosts/MyPosts';
 
 const theme = createTheme({
@@ -33,9 +36,12 @@ const App = () => {
           <MainLayout>
             <Routes>
               <Route exact path='/allposts' element={<AllPosts/>} />
+              <Route exact path='/allmyposts' element={<AllMyPosts/>} />
               <Route exact path='/myposts' element={<MyPosts/>} />
               <Route exact path='/post/add' element={<PostAdd/>} />
               <Route exact path='/post/:id' element={<Post/>} />
+              <Route exact path='/post1/:id' element={<PostMy/>} />
+              <Route exact path='/post2/:id' element={<BackPostMy/>} />
               <Route exact path='/post/:id/edit' element={<PostEdit/>} />
               <Route exact path='/userloggedposts' element={<UserLoggedPosts/>} />
               <Route path='*' element={<NotFound/>} />

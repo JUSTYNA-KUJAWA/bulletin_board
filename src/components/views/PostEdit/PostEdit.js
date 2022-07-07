@@ -15,7 +15,7 @@ const PostEdit = () => {
   const navigate = useNavigate();
 
   const handleSubmit = post => {
-    dispatch(updatePostRequest(post, id));
+    dispatch(updatePostRequest({...post, id}));
     navigate('/myposts');
   };
 
