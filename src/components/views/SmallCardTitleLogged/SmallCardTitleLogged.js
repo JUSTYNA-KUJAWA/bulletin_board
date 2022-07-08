@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardMedia, CardActions } from '@material-ui/core';
 import OutlinedButton from '../OfflineButton/OfflineButton';
 import PropTypes from 'prop-types';
-import styles from './SmallCardTitle.module.scss';
+import styles from './SmallCardTitleLogged.module.scss';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SmallCardTitle = (props) => {
+const SmallCardTitleLogged = (props) => {
   console.log(props);
   const classes = useStyles();
   return (
@@ -32,16 +32,16 @@ const SmallCardTitle = (props) => {
         alt={props.title}
       />
       <CardActions>
-        <Link to={`/post2/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
+        <Link to={`/post3/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
     </Card>
   );
 };
 
-SmallCardTitle.propTypes={
+SmallCardTitleLogged.propTypes={
   title: PropTypes.string.isRequired,
   image: PropTypes.string,
   id: PropTypes.string.isRequired,
 };
 
-export default SmallCardTitle ;
+export default SmallCardTitleLogged ;

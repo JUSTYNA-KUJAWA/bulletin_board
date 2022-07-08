@@ -31,22 +31,24 @@ exports.getPostById = async (req, res) => {
 exports.addNewPost = async (req, res) => {
   const { mail, created, status, title, text, image, price, phone, location } = req.body;
 
-  if (mail && created && status && title && text && image && price && phone  && location && req.file) {
-    console.log(req);
-    res.render('posts', { projectFileName: req.file.originalname, isSent: true });
-  }
-  else {
-    res.render('posts', { isError: true });
+  try {
+    const newPost = new Post({ mail, created, status, title, text, image, price, phone, location });
+    await newPost.save();
+    res.json(newPost);
+  } catch(err) {
+    if(NODE_ENV === 'production') console.log('Database error...');
+    else res.status(500).json(err);
   }
 };
 
 exports.editPost = async (req, res) => {
-  const { mail, created, updated, status, title, text, image, price, phone, location } = req.body;
+  const { 
+    mail, created, updated, status, title, text, image, price, phone, location } = req.body;
 
   try {
     const post = await Post.findById(req.params.id);
     if(post){
-      post.mail = mail;
+      post.mail =mail;
       post.created = created;
       post.updated = updated;
       post.status = status;
@@ -68,10 +70,10 @@ exports.editPost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = Post.findById(req.params.id);
     if(post){
       await Post.deleteOne({ _id: req.params.id });
-      res.json(post);
+      res.json(req.params.id);
     } else res.status(404).json({ message: 'Not found' });
   }
   catch(err) {
@@ -79,3 +81,4 @@ exports.deletePost = async (req, res) => {
     else res.status(500).json(err);
   }
 };
+  

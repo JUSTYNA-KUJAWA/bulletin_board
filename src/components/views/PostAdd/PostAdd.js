@@ -11,13 +11,13 @@ const PostAdd = () => {
   const navigate = useNavigate();
 
   const loggedInUser = useSelector(state => getLoggedUser(state));
+  if (!loggedInUser) return <Navigate to='*' />;
 
   const handleSubmit = post => {
     dispatch(addPostRequest(post));
-    navigate('/userloggedposts');
+    navigate('/myposts');
   };
-
-  if (!loggedInUser) return <Navigate to='*' />;
+  
   return (
     <div className={styles.root}>
       <PostForm

@@ -1,17 +1,14 @@
-/* eslint-disable linebreak-style */
-
 import axios from 'axios';
 import { API_URL } from '../config';
 
 /* selectors */
-export const getAll = ({posts}) => (posts.data);
+export const getAllPosts = ({posts}) => (posts.data);
 export const getMyPosts = ({posts}, mail) => posts.data.filter(post => post.mail === mail);
-export const getUserLogedPosts = ({posts}, mail) => posts.data.filter(post => post.mail === mail);
 export const getAllPublished = ({posts}) => posts.data.filter(post => post.status === 'published');
-export const getPost = ({ posts }, postId) => (posts.data).find(post => post._id === postId);
+export const getPostById = ({ posts }, postId) => (posts.data).find(post => post._id === postId);
 export const getIsLoading = ({ posts }) => posts.loading;
 
-
+/* action name creator */
 const reducerName = 'posts';
 const createActionName = name => `app/${reducerName}/${name}`;
 
@@ -78,7 +75,7 @@ export const updatePostRequest = (post, id) => async dispatch => {
     dispatch(fetchStarted());
     const res = await axios({
       method: 'put',
-      url: `${API_URL}/post/${id}`,
+      url: `${API_URL}/posts/${id}`,
       data: post,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
@@ -94,7 +91,7 @@ export const removePostRequest = (postId) => {
     dispatch(fetchStarted());
 
     axios
-      .delete(`${API_URL}/post/${postId}`)
+      .delete(`${API_URL}/posts/${postId}`)
       .then(res => {
         dispatch(removePost(res.data));
         dispatch(fetchEnded());

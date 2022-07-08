@@ -3,19 +3,19 @@ import { useParams } from 'react-router';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updatePostRequest } from '../../../redux/postsRedux';
-import { getPost } from '../../../redux/postsRedux';
+import { getPostById } from '../../../redux/postsRedux';
 import PostForm from '../../features/PostForm/PostForm';
 import styles from './PostEdit.module.scss';
 
 const PostEdit = () => {
   const { id } = useParams();
-  const postData = useSelector(state => getPost(state, id));
+  const postData = useSelector(state => getPostById(state, id));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = post => {
-    dispatch(updatePostRequest({...post, id}));
+    dispatch(updatePostRequest(post, id));
     navigate('/myposts');
   };
 

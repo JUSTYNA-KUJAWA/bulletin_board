@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPost, removePostRequest, getIsLoading } from '../../../redux/postsRedux';
+import { getPostById, removePostRequest, getIsLoading } from '../../../redux/postsRedux';
 import { getLoggedUser } from '../../../redux/usersRedux';
 import CommonButton from '../CommonButton/CommonButton';
 import OfflineButton from '../OfflineButton/OfflineButton';
@@ -14,7 +14,7 @@ import utils from '../../../utils';
 
 const PostMy= () => {
   const { id } = useParams();
-  const post = useSelector(state => getPost(state, id));
+  const post = useSelector(state => getPostById(state, id));
   const loggedInUser = useSelector(state => getLoggedUser(state));
   const load = useSelector(state => getIsLoading(state));
 

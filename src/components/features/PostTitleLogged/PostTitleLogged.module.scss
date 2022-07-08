@@ -1,8 +1,10 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+  background-color: aliceblue;
+  .text{
+    background-color: aliceblue;
+  }
   h2{
     margin-left: 30px;
     padding-top: 30px;

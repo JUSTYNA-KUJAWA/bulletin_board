@@ -2,9 +2,7 @@
 
 .root {
   height: 400px;
-  padding: 5px 25px;
   @include flex(column, center, center);
-  background-color: $main;
   background-image: url('/images/pexels-andrea-piacquadio-3761509.jpg');
   background-position: center center;
   background-size: cover;

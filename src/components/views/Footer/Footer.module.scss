@@ -1,10 +1,9 @@
 @import '../../../styles/settings.scss';
 
 .root {
-  margin-top: 40px;
-  min-height: 80px;
-  padding: 5px 25px;
-  background-color: white;
+  min-height: 60px;
+  padding: 5px 55px;
+  background-color: cadetblue;
   @include flex(row, center, center);
 
   p {

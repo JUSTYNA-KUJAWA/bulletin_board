@@ -35,7 +35,7 @@ const LoginSelect = ({ className}) => {
         role: 'loggedUser',
       };
       dispatch(loginUser(user));
-      navigate('/userloggedposts');
+      navigate('/myposts');
     } else {
       dispatch(logoutUser());
       navigate('/');

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { getLoggedUser } from '../../../redux/usersRedux';
 import { getIsLoading } from '../../../redux/postsRedux';
 import { TextField, Button } from '@material-ui/core';
+import ImageUploader from 'react-images-upload';
 import { useForm } from 'react-hook-form';
 import CommonButton from '../../views/CommonButton/CommonButton';
-import Circular from '../../views/Circular/Circular';
-import ImageUploader from 'react-images-upload';
+import { Link } from 'react-router-dom';
+import { teal } from '@material-ui/core/colors';
+import HomeIcon from '@material-ui/icons/Home';
+import {IconButton } from '@material-ui/core';
 import styles from './PostForm.module.scss';
+import PropTypes from 'prop-types';
 
 const PostForm = (props) => {
   // Form validation
@@ -33,6 +36,10 @@ const PostForm = (props) => {
   const updated = isUpdated();
   const mail = loggedInUser.mail;
 
+  // Image handling
+  const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
+  const cloudName = process.env.REACT_APP_CLOUD_NAME;
+
   const [image, setImage] = useState(props.image || '');
   const [imageSelected, setImageSelected ] = useState('');
   const [imageError, setImageError] = useState(false);
@@ -49,7 +56,12 @@ const PostForm = (props) => {
   const handleImageUpload = () => {
     const data = new FormData();
     data.append('file', imageSelected);
-    fetch()
+    data.append('upload_preset', `${uploadPreset}`);
+    data.append('cloud_name', `${cloudName}`);
+    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,{
+      method: 'post',
+      body: data,
+    })
       .then(resp => resp.json())
       .then(data => {
         setImage(data.url);
@@ -98,14 +110,11 @@ const PostForm = (props) => {
             </div>
           )
         }
-        { (load.active) && <Circular color="primary" className="standard-box d-block mr-auto ml-auto" /> }
         { ((!load.active && !load.success) || load.error) &&
         (
           <div className={styles.form}>
             <TextField
-              style={{ width: '100%', marginBottom: '10px', "& .MuiTextField-root": {
-                fontSize: '50px',
-              }}}
+              style={{ width: '100%', marginBottom: '10px' }}
               {...register('title', { required: true, maxLength: 200 })}
               type='text'
               label='title'
@@ -128,9 +137,7 @@ const PostForm = (props) => {
             {isImageError()}
             {isImage()}
             <TextField
-              style={{ width: '100%', marginTop: '30px', marginBottom: '10px', "& .MuiTextField-root": {
-                fontSize: '50pt',
-              }}}
+              style={{ width: '100%', marginTop: '30px', marginBottom: '10px'}}
               {...register('text', { required: true, maxLength: 1000 })}
               required
               type='text'
@@ -143,7 +150,7 @@ const PostForm = (props) => {
             />
             {errors.text && <span className={styles.error}>This field is required. Text can have up to 1000 characters.</span>}
             <TextField
-              style={{ width: '300px', margin: '5px' }}
+              style={{ width: '200px', margin: '5px' }}
               {...register('price', { required: true, min: 0 })}
               required
               type='text'
@@ -155,7 +162,7 @@ const PostForm = (props) => {
             {errors.price && <span className={styles.error}>Price is required.</span>}
             <TextField
               {...register('phone', {required: true, max: 11, min: 11, maxLength: 11, pattern: /^\d{3}-\d{3}-\d{3}$/})}
-              style={{ width: '300px', margin: '5px' }}
+              style={{ width: '200px', margin: '5px' }}
               type='text'
               label='phone number'
               variant='outlined'
@@ -165,7 +172,7 @@ const PostForm = (props) => {
             />
             {errors.phone && <span className={styles.error}>Please enter phone number in the correct format.</span>}
             <TextField
-              style={{ width: '300px', margin: '5px', fontWeight: "bold" }}
+              style={{ width: '200px', margin: '5px' }}
               type='text'
               label='location'
               variant='outlined'
@@ -183,6 +190,16 @@ const PostForm = (props) => {
                   Save as draft
                 </CommonButton>
               </div>
+              <IconButton
+                edge='start'
+                className={styles.button1}
+                color='inherit'
+                aria-label='menu'
+                component={Link}
+                to={'/homepagelogged'}
+              >
+    <HomeIcon style={{ color: teal[800] , fontSize: 45 }} />
+    </IconButton>
             </div>
           </div>
         )}
