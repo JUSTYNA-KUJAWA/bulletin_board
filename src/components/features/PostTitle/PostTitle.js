@@ -5,9 +5,6 @@ import { Grid } from '@material-ui/core/';
 import { useSelector } from 'react-redux';
 import { getAllPublished } from '../../../redux/postsRedux';
 import { Link } from 'react-router-dom';
-import { teal } from '@material-ui/core/colors';
-import HomeIcon from '@material-ui/icons/Home';
-import {IconButton } from '@material-ui/core';
 import CommonButton from '../../views/CommonButton/CommonButton';
 
 const PostTitle = () => {
@@ -17,17 +14,7 @@ console.log(postTitle);
   return (
     <div className={styles.root}>
     <Link to={'/post/add/guest'} className={styles.link}><CommonButton>Add Post</CommonButton></Link> 
-    <Link to={`/posts`} className={styles.link}><CommonButton>View all</CommonButton></Link> 
-    <IconButton
-      edge='start'
-      className={styles.root}
-      color='inherit'
-      aria-label='menu'
-      component={Link}
-      to={'/'}
-    >
-    <HomeIcon style={{ color: teal[800] , fontSize: 45 }} />
-    </IconButton> 
+    <Link to={`/posts`} className={styles.link}><CommonButton>View all</CommonButton></Link>  
       <h2>The newest announces !</h2>
       <Grid container spacing={3}>
         {postTitle.map(post => (

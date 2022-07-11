@@ -7,9 +7,6 @@ import ImageUploader from 'react-images-upload';
 import { useForm } from 'react-hook-form';
 import CommonButton from '../../views/CommonButton/CommonButton';
 import { Link } from 'react-router-dom';
-import { teal } from '@material-ui/core/colors';
-import HomeIcon from '@material-ui/icons/Home';
-import {IconButton } from '@material-ui/core';
 import styles from './PostForm.module.scss';
 import PropTypes from 'prop-types';
 
@@ -37,8 +34,6 @@ const PostForm = (props) => {
   const mail = loggedInUser.mail;
 
   // Image handling
-  const uploadPreset = process.env.REACT_APP_UPLOAD_PRESET;
-  const cloudName = process.env.REACT_APP_CLOUD_NAME;
 
   const [image, setImage] = useState(props.image || '');
   const [imageSelected, setImageSelected ] = useState('');
@@ -56,9 +51,9 @@ const PostForm = (props) => {
   const handleImageUpload = () => {
     const data = new FormData();
     data.append('file', imageSelected);
-    data.append('upload_preset', `${uploadPreset}`);
-    data.append('cloud_name', `${cloudName}`);
-    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,{
+    data.append('upload_preset', 'react_cloudinary');
+    data.append('cloud_name', 'dxvmoybwb');
+    fetch(`https://api.cloudinary.com/v1_1/dxvmoybwb/image/upload`,{
       method: 'post',
       body: data,
     })
@@ -190,16 +185,7 @@ const PostForm = (props) => {
                   Save as draft
                 </CommonButton>
               </div>
-              <IconButton
-                edge='start'
-                className={styles.button1}
-                color='inherit'
-                aria-label='menu'
-                component={Link}
-                to={'/homepagelogged'}
-              >
-    <HomeIcon style={{ color: teal[800] , fontSize: 45 }} />
-    </IconButton>
+              <Link to={`/myposts`} className={styles.link}><CommonButton>Back MyPosts</CommonButton></Link>
             </div>
           </div>
         )}

@@ -54,21 +54,29 @@ export const fetchAllPosts = () => {
   };
 };
 
-export const addPostRequest = (post) => async dispatch => {
+export const addPostRequest = (post, _id) =>{
+return async dispatch => {
+  dispatch(fetchStarted({ name: 'ADD_AD' }));
   try {
-    dispatch(fetchStarted());
-    const res = await axios({
-      method: 'post',
-      url: `${API_URL}/posts`,
-      data: post,
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    let res = await axios.post(
+      `${API_URL}/posts`,
+      post,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
     dispatch(addPost(res.data));
     dispatch(fetchEnded());
   } catch (err) {
     dispatch(fetchError(err));
   }
 };
+};
+
+
+
 
 export const updatePostRequest = (post, id) => async dispatch => {
   try {

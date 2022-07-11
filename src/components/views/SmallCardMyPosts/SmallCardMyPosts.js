@@ -56,7 +56,7 @@ const SmallCardMyPosts = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/post/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
+        <Link to={`/post2/${props.id}`} className={styles.link}> <OutlinedButton>Show more</OutlinedButton></Link>
       </CardActions>
     </Card>
   );

@@ -4,10 +4,8 @@ import { getMyPosts } from '../../../redux/postsRedux';
 import { getLoggedUser } from '../../../redux/usersRedux';
 import PostViewMyPosts from '../../features/PostViewMyPosts/PostViewMyPosts';
 import CommonButton from '../CommonButton/CommonButton';
+import Logo from '../../features/Logo/Logo';
 import Container from '@material-ui/core/Container';
-import HomeIcon from '@material-ui/icons/Home';
-import {IconButton } from '@material-ui/core';
-import { teal } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 import styles from './MyPosts.module.scss';
 
@@ -17,27 +15,20 @@ const MyPosts = () => {
   console.log(posts);
   
   return (
-    <Container className={styles.root}>
-      <Link to={'/post/add'} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
-      <IconButton
-      edge='start'
-      className={styles.root}
-      color='inherit'
-      aria-label='menu'
-      component={Link}
-      to={'/homepagelogged'}
-    >
-    <HomeIcon style={{ color: teal[800] , fontSize: 45 }} />
-    </IconButton>
+    <div className={styles.root}>
+    <Logo></Logo>
+    <Container>
       <div className='text'>
         <h3>Welcome {loggedInUser.name}!!</h3>
       </div>
       <div className={styles.addButton}>
       <Link to={`/myposts`} className={styles.link}><CommonButton>My posts</CommonButton></Link>
       <Link to={`/allmyposts`} className={styles.link}><CommonButton>All posts</CommonButton></Link>
+      <Link to={'/post/add'} className={styles.link}><CommonButton>Add Post</CommonButton></Link>
       </div>
       <PostViewMyPosts posts={posts}/>
     </Container>
+    </div>
   );
 };
 
