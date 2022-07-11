@@ -9,7 +9,7 @@ const PostsHomePage = () => {
   const posts = useSelector(state => getAllPublished(state));
   return (
     <div className={styles.root}>
-    <Logo></Logo>
+      <Logo></Logo>
       <PostsView posts={posts}/>
     </div>
   );

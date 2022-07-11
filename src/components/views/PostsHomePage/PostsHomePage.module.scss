@@ -3,4 +3,5 @@
 .root {
   @include height();
   background-color: aliceblue;
+  padding-left: 20px;
 }
