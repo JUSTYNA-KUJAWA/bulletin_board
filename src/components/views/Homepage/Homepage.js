@@ -1,17 +1,16 @@
-import React, {useEffect} from 'react';
-import ListTitlesPosts from '../ListTitlesPosts/ListTitlesPosts';
-import Welcome from '../Welcome/Welcome';
-import styles from './Homepage.module.scss';
+import React, { useEffect } from "react";
+import Welcome from "../Welcome/Welcome";
+import ListAllTasks from "../ListAllTasks/ListAllTasks";
+import styles from "./Homepage.module.scss";
 
 const Homepage = () => {
-  
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, []);
   return (
     <div className={styles.root}>
       <Welcome />
-      <ListTitlesPosts />
+      <ListAllTasks />
     </div>
   );
 };

@@ -1,13 +1,10 @@
 export const initialState = {
-  posts: {
+  tasks: {
     data: [],
     loading: {
       active: false,
       error: false,
       success: false,
     },
-  },
-  users: {
-    data: '',
   },
 };

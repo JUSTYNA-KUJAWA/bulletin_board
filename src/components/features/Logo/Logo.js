@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './Logo.module.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "./Logo.module.scss";
 
 const Logo = () => {
   return (
     <div className={styles.root}>
-      <h1>Welcome to the Bulletin Board</h1>
-      <h2>waiting for your posts !!!</h2>
+      <h1>Welcome to the ToDoList !!!</h1>
     </div>
   );
 };
